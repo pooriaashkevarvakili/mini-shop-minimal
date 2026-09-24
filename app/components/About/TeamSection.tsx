@@ -35,7 +35,6 @@ const TeamSection: React.FC = () => {
       dir="rtl"
     >
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
         <div className="text-right mb-14">
           <span className="text-gray-400 text-sm font-medium mb-2 block">
             تیم
@@ -46,14 +45,12 @@ const TeamSection: React.FC = () => {
           </h2>
         </div>
 
-        {/* Team Members */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 md:gap-8">
           {teamMembers.map((member) => (
             <div
               key={member.id}
               className="flex flex-col items-center text-center group"
             >
-              {/* Avatar */}
               <div className="relative mb-5">
                 <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-white shadow-md transition-transform duration-300 group-hover:scale-105">
                   <Image
@@ -64,12 +61,10 @@ const TeamSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Name */}
               <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1">
                 {member.name}
               </h3>
 
-              {/* Role */}
               <span className="text-gray-500 text-sm">
                 {member.role}
               </span>

@@ -12,7 +12,6 @@ const OurStorySection: React.FC = () => {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-16">
           
-          {/* Text Section */}
           <div className="flex-1 text-right" dir="rtl">
             <h2 className="mb-6 text-3xl font-bold text-neutral-900 md:text-4xl">
               داستان ما
@@ -37,7 +36,6 @@ const OurStorySection: React.FC = () => {
             </div>
           </div>
 
-          {/* Image Section */}
           <div className="relative w-full max-w-md shrink-0 lg:max-w-lg">
             <div className="overflow-hidden rounded-3xl shadow-sm">
               <Image
@@ -52,7 +50,6 @@ const OurStorySection: React.FC = () => {
               />
             </div>
 
-            {/* Badge */}
             <div className="absolute -top-3 left-4 z-10">
               <div className="rounded-full bg-neutral-800 px-4 py-1.5 text-sm font-medium text-white shadow-md">
                 از ۱۴۰۱

@@ -33,14 +33,11 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Side - Content */}
         <div className="flex flex-col items-start text-right space-y-6" dir="rtl">
-          {/* Badge */}
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-gray-100 text-gray-700 text-sm font-medium">
             کالاهای باکیفیت ایرانی
           </div>
 
-          {/* Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
             سادگی در
             <br />

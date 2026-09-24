@@ -104,7 +104,6 @@ const ValuesSection: React.FC = () => {
               {item.icon}
             </div>
 
-            {/* Content */}
             <div className="w-full text-right">
               <h3 className="text-lg font-semibold text-neutral-900 mb-3">
                 {item.title}

@@ -24,7 +24,6 @@ function useCountUp(
 
   useEffect(() => {
     if (!startOnView) {
-      // start immediately
       animate();
       return;
     }
@@ -48,7 +47,6 @@ function useCountUp(
 
       const step = (currentTime: number) => {
         const progress = Math.min((currentTime - startTime) / duration, 1);
-        // easeOutExpo for a nice feel
         const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
         setCount(Math.floor(ease * end));
 

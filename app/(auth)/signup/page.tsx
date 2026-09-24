@@ -47,8 +47,7 @@ const SignupForm: React.FC = () => {
       try {
         console.log('Form values:', values);
 
-        // API call
-        // await signup(values);
+       
 
         alert('حساب کاربری با موفقیت ایجاد شد!');
       } catch (error) {
@@ -75,7 +74,6 @@ const SignupForm: React.FC = () => {
           </div>
         </div>
 
-        {/* Title */}
         <div className="text-center mb-8">
           <Title
             level={2}
@@ -89,7 +87,6 @@ const SignupForm: React.FC = () => {
           </Text>
         </div>
 
-        {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
 
           <Form
@@ -97,7 +94,6 @@ const SignupForm: React.FC = () => {
             onFinish={() => formik.handleSubmit()}
           >
 
-            {/* Full Name */}
             <Form.Item
               label={
                 <span className="text-sm text-gray-600">
@@ -131,7 +127,6 @@ const SignupForm: React.FC = () => {
               />
             </Form.Item>
 
-            {/* Email */}
             <Form.Item
               label={
                 <span className="text-sm text-gray-600">
@@ -166,7 +161,6 @@ const SignupForm: React.FC = () => {
               />
             </Form.Item>
 
-            {/* Password */}
             <Form.Item
               label={
                 <span className="text-sm text-gray-600">
@@ -200,7 +194,6 @@ const SignupForm: React.FC = () => {
               />
             </Form.Item>
 
-            {/* Confirm Password */}
             <Form.Item
               label={
                 <span className="text-sm text-gray-600">
@@ -234,7 +227,6 @@ const SignupForm: React.FC = () => {
               />
             </Form.Item>
 
-            {/* Submit Button */}
             <Form.Item className="mb-4">
               <Button
                 type="primary"
@@ -248,7 +240,6 @@ const SignupForm: React.FC = () => {
               </Button>
             </Form.Item>
 
-            {/* Terms */}
             <div className="text-center">
               <Text className="text-xs text-gray-400">
                 با ثبت‌نام، شرایط استفاده را می‌پذیرید.
@@ -258,7 +249,6 @@ const SignupForm: React.FC = () => {
           </Form>
         </div>
 
-        {/* Login Link */}
         <div className="text-center mt-6">
           <Text className="text-sm text-gray-600">
             قبلاً ثبت‌نام کرده‌اید؟{' '}

@@ -14,12 +14,10 @@ export default function LoginPage() {
     setLoading(true);
     console.log('Login values:', values);
 
-    // تست: هر ایمیل و رمزی وارد کنید – وارد می‌شوید!
     setTimeout(() => {
       message.success('ورود با موفقیت انجام شد!');
       setLoading(false);
-      // بعد از لاگین موفق:
-      // router.push('/dashboard');
+     
     }, 800);
   };
 
@@ -29,22 +27,18 @@ export default function LoginPage() {
       dir="rtl"
     >
       <div className="w-full max-w-[420px]">
-        {/* Logo */}
         <div className="flex justify-center mb-6">
           <div className="w-14 h-14 bg-black rounded-2xl flex items-center justify-center shadow-lg">
             <span className="text-white text-2xl font-bold">م</span>
           </div>
         </div>
 
-        {/* Title */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">ورود به حساب</h1>
           <p className="text-gray-500 text-sm">خوش برگشتید !</p>
         </div>
 
-        {/* Card */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          {/* Test Banner */}
           <div className="bg-amber-50 border border-amber-200 text-amber-700 text-sm rounded-xl px-4 py-3 mb-6 text-center">
             تست: هر ایمیل و رمزی وارد کنید – وارد می‌شوید!
           </div>
@@ -56,7 +50,6 @@ export default function LoginPage() {
             requiredMark={false}
             size="large"
           >
-            {/* Email */}
             <Form.Item
               name="email"
               label={<span className="text-gray-700 font-medium">ایمیل</span>}
@@ -72,7 +65,6 @@ export default function LoginPage() {
               />
             </Form.Item>
 
-            {/* Password */}
             <Form.Item
               name="password"
               label={
@@ -95,7 +87,6 @@ export default function LoginPage() {
               />
             </Form.Item>
 
-            {/* Submit Button */}
             <Form.Item className="mb-6">
               <Button
                 type="primary"
@@ -109,12 +100,10 @@ export default function LoginPage() {
             </Form.Item>
           </Form>
 
-          {/* Divider */}
           <Divider plain className="text-gray-400 text-sm my-6">
             یا ورود با
           </Divider>
 
-          {/* Google Button */}
           <Button
             block
             size="large"
@@ -126,7 +115,6 @@ export default function LoginPage() {
           </Button>
         </div>
 
-        {/* Sign up link */}
         <div className="text-center mt-8 text-sm text-gray-600">
           حساب ندارید؟{' '}
           <Link

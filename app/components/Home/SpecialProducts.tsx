@@ -87,7 +87,6 @@ export default function SpecialProducts() {
       dir="rtl"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold text-gray-900">
@@ -104,14 +103,12 @@ export default function SpecialProducts() {
           </span>
         </div>
 
-        {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <article
               key={product.id}
               className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
             >
-              {/* Image */}
               <div className="relative aspect-square overflow-hidden bg-gray-100">
                 <img
                   src={
@@ -123,7 +120,6 @@ export default function SpecialProducts() {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
-                {/* Badge */}
                 {product.badge && (
                   <span
                     className={`absolute top-3 left-3 px-2.5 py-1 text-xs font-medium rounded-full ${
@@ -135,7 +131,6 @@ export default function SpecialProducts() {
                 )}
               </div>
 
-              {/* Content */}
               <div className="p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
