@@ -1,4 +1,5 @@
 
+import type { Metadata } from "next";
 import {
   FiMail,
   FiMapPin,
@@ -6,12 +7,65 @@ import {
   FiClock,
 } from "react-icons/fi";
 
+export const metadata: Metadata = {
+  title: "تماس با ما | مینیمال شاپ",
+  description:
+    "برای پرسش، پیشنهاد یا دریافت اطلاعات بیشتر درباره محصولات مینیمال شاپ با ما در ارتباط باشید.",
+  keywords: [
+    "تماس با ما",
+    "ارتباط با ما",
+    "مینیمال شاپ",
+    "پشتیبانی",
+    "فروشگاه مینیمال",
+  ],
+
+  alternates: {
+    canonical: "https://minimalshop.ir/contact",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "fa_IR",
+    url: "https://minimalshop.ir/contact",
+    siteName: "مینیمال شاپ",
+    title: "تماس با ما | مینیمال شاپ",
+    description:
+      "برای پرسش، پیشنهاد یا دریافت اطلاعات بیشتر درباره محصولات مینیمال شاپ با ما در ارتباط باشید.",
+    images: [
+      {
+        url: "https://minimalshop.ir/images/og-contact.jpg",
+        width: 1200,
+        height: 630,
+        alt: "تماس با مینیمال شاپ",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "تماس با ما | مینیمال شاپ",
+    description:
+      "برای پرسش، پیشنهاد یا دریافت اطلاعات بیشتر درباره محصولات مینیمال شاپ با ما در ارتباط باشید.",
+    images: ["https://minimalshop.ir/images/og-contact.jpg"],
+  },
+};
+
 const Contact = () => {
   return (
     <main
       dir="rtl"
       className="min-h-screen bg-white font-sans text-[#222]"
     >
+      {/* Header */}
       <section className="border-b border-[#f1f1f1] px-6 py-8 md:px-[8%]">
         <div className="ml-auto max-w-[540px] text-right">
           <h1 className="text-[38px] font-extrabold leading-tight text-[#171717] md:text-[48px]">
@@ -30,6 +84,7 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Contact */}
       <section className="min-h-[calc(100vh-253px)] bg-[#fafafa] px-6 py-12 md:px-[9%] md:py-[65px]">
         <div
           className="
@@ -43,7 +98,7 @@ const Contact = () => {
             md:gap-[65px]
           "
         >
-          
+          {/* Contact Info */}
           <div className="order-1 space-y-7 md:order-1">
             <ContactItem
               icon={<FiMapPin size={20} strokeWidth={1.8} />}
@@ -56,14 +111,26 @@ const Contact = () => {
               icon={<FiPhone size={20} strokeWidth={1.8} />}
               title="تلفن"
             >
-              <span dir="ltr">۰۲۱-۱۲۳۴۵۶۷۸</span>
+              <a
+                href="tel:+982112345678"
+                dir="ltr"
+                className="transition hover:text-black"
+              >
+                ۰۲۱-۱۲۳۴۵۶۷۸
+              </a>
             </ContactItem>
 
             <ContactItem
               icon={<FiMail size={20} strokeWidth={1.8} />}
               title="ایمیل"
             >
-              <span dir="ltr">hello@minimalshop.ir</span>
+              <a
+                href="mailto:hello@minimalshop.ir"
+                dir="ltr"
+                className="transition hover:text-black"
+              >
+                hello@minimalshop.ir
+              </a>
             </ContactItem>
 
             <ContactItem
@@ -74,17 +141,25 @@ const Contact = () => {
             </ContactItem>
           </div>
 
-        
-          <div className="order-2 rounded-[15px] bg-white p-6 md:order-2 md:p-8">
+          {/* Form */}
+          <div className="order-2 rounded-[15px] bg-white p-6 md:p-8">
             <form className="space-y-0">
+              {/* Name + Email */}
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-right text-[13px] font-medium text-[#555]">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-right text-[13px] font-medium text-[#555]"
+                  >
                     نام و نام‌خانوادگی <span>*</span>
                   </label>
 
                   <input
+                    id="name"
+                    name="name"
                     type="text"
+                    autoComplete="name"
+                    required
                     placeholder="علی احمدی"
                     className="
                       h-[46px]
@@ -107,13 +182,20 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-right text-[13px] font-medium text-[#555]">
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-right text-[13px] font-medium text-[#555]"
+                  >
                     ایمیل <span>*</span>
                   </label>
 
                   <input
+                    id="email"
+                    name="email"
                     type="email"
                     dir="ltr"
+                    autoComplete="email"
+                    required
                     placeholder="ali@example.com"
                     className="
                       h-[46px]
@@ -136,12 +218,18 @@ const Contact = () => {
                 </div>
               </div>
 
+              {/* Subject */}
               <div className="mt-5">
-                <label className="mb-2 block text-right text-[13px] font-medium text-[#555]">
+                <label
+                  htmlFor="subject"
+                  className="mb-2 block text-right text-[13px] font-medium text-[#555]"
+                >
                   موضوع
                 </label>
 
                 <input
+                  id="subject"
+                  name="subject"
                   type="text"
                   placeholder="سوال درباره محصول..."
                   className="
@@ -164,12 +252,19 @@ const Contact = () => {
                 />
               </div>
 
+              {/* Message */}
               <div className="mt-5">
-                <label className="mb-2 block text-right text-[13px] font-medium text-[#555]">
+                <label
+                  htmlFor="message"
+                  className="mb-2 block text-right text-[13px] font-medium text-[#555]"
+                >
                   پیام <span>*</span>
                 </label>
 
                 <textarea
+                  id="message"
+                  name="message"
+                  required
                   placeholder="پیام خود را اینجا بنویسید..."
                   className="
                     h-[126px]
