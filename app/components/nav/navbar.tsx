@@ -15,7 +15,6 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
-          {/* لوگو سمت راست */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-bold text-sm">
               م
@@ -25,7 +24,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* منوی دسکتاپ */}
           <nav className="hidden md:flex items-center gap-1">
             <Link
               href="/"
@@ -47,7 +45,6 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* دکمه‌های ورود و ثبت‌نام دسکتاپ */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/login"
@@ -63,7 +60,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* دکمه همبرگر موبایل */}
           <button
             onClick={toggleMenu}
             className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
@@ -74,7 +70,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* منوی موبایل - از بالا و زیر هدر */}
       <div
         className={`md:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg transition-all duration-300 ease-out overflow-hidden ${
           isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
