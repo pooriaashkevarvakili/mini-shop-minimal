@@ -14,7 +14,6 @@ body {
   margin: 0;
 }
 
-/* Padding پیش‌فرض برای صفحات */
 .page-container {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
 }
