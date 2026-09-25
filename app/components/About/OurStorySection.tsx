@@ -4,7 +4,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import Mobel from '../../../public/mobel.avif';
+import Mobel from '../../../public/mobel.webp';
 
 const OurStorySection: React.FC = () => {
   return (

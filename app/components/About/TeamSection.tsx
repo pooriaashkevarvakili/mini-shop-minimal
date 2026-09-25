@@ -1,8 +1,8 @@
 import React from 'react';
-import Sara from '../../../public/sara.avif'
+import Sara from '../../../public/sara.webp'
 import Image, { StaticImageData } from "next/image";
-import Reza from '../../../public/rezaa.avif'
-import Nilufar from '../../../public/nilufarr.avif'
+import Reza from '../../../public/rezaa.webp'
+import Nilufar from '../../../public/nilufarr.webp'
 interface TeamMember {
   id: number;
   name: string;

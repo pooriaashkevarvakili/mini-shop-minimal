@@ -70,14 +70,7 @@ const Footer: React.FC = () => {
                   ثبت‌نام
                 </a>
               </li>
-              <li>
-                <a
-                  href="/dashboard"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  داشبورد
-                </a>
-              </li>
+           
             </ul>
           </div>
 
@@ -100,14 +93,7 @@ const Footer: React.FC = () => {
                   تماس با ما
                 </a>
               </li>
-              <li>
-                <a
-                  href="/return-policy"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  سیاست بازگشت
-                </a>
-              </li>
+          
             </ul>
           </div>
         </div>
