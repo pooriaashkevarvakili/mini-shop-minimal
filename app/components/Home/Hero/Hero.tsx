@@ -2,6 +2,7 @@
 import React from "react";
 import shopKagesh from '../../../../public/photoshoe.webp'
 import Image from "next/image";
+import Link from "next/link";
 const Hero: React.FC = () => {
   return (
     <section className="min-h-screen bg-white flex items-center justify-center px-4 md:px-8 lg:px-16 py-12">
@@ -57,12 +58,16 @@ const Hero: React.FC = () => {
               مشاهده محصولات
             </button>
 
-            <button className="text-gray-700 hover:text-gray-900 font-medium flex items-center gap-2 transition-colors duration-300 group">
+              <Link
+              href="/about"
+              className="text-gray-700 hover:text-gray-900 font-medium flex items-center gap-2 transition-colors duration-300 group"
+            >
               بیشتر بدانید
+
               <span className="group-hover:-translate-x-1 transition-transform duration-300">
                 ←
               </span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
