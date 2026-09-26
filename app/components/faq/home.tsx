@@ -1,16 +1,16 @@
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
 
 export default function Home() {
-  return (
-    <main
-      dir="rtl"
-      className=" bg-white"
-    >
-      <div className="h-[17px] w-full border-b border-[#e9e9e9] bg-[#f3f3f3]" />
+    return (
+        <main
+            dir="rtl"
+            className=" bg-white"
+        >
+            <div className="h-[17px] w-full border-b border-[#e9e9e9] bg-[#f3f3f3]" />
 
-      <section className="flex min-h-[320px] flex-col items-center pt-[64px]">
-        <div
-          className="
+            <section className="flex min-h-[320px] flex-col items-center pt-[64px]">
+                <div
+                    className="
             flex
             h-[48px]
             w-[48px]
@@ -19,27 +19,27 @@ export default function Home() {
             rounded-[16px]
             bg-[#202020]
           "
-        >
-          <HiOutlineQuestionMarkCircle
-            className="text-[21px] text-white"
-            strokeWidth={1.8}
-          />
-        </div>
+                >
+                    <HiOutlineQuestionMarkCircle
+                        className="text-[21px] text-white"
+                        strokeWidth={1.8}
+                    />
+                </div>
 
-        <span
-          className="
+                <span
+                    className="
             mt-[17px]
             text-[12px]
             font-medium
             leading-5
             text-[#a3a3a3]
           "
-        >
-          مرکز راهنما
-        </span>
+                >
+                    مرکز راهنما
+                </span>
 
-        <h1
-          className="
+                <h1
+                    className="
             m-0
             mt-[5px]
             text-center
@@ -50,12 +50,12 @@ export default function Home() {
             text-[#111111]
             max-sm:text-[34px]
           "
-        >
-          سوالات متداول
-        </h1>
+                >
+                    سوالات متداول
+                </h1>
 
-        <p
-          className="
+                <p
+                    className="
             m-0
             mt-[8px]
             px-5
@@ -66,10 +66,10 @@ export default function Home() {
             text-[#777777]
             max-sm:text-[13px]
           "
-        >
-          پاسخ سوال‌های پرتکرار درباره سفارش، ارسال و بازگشت کالا را اینجا پیدا کنید.
-        </p>
-      </section>
-    </main>
-  );
+                >
+                    پاسخ سوال‌های پرتکرار درباره سفارش، ارسال و بازگشت کالا را اینجا پیدا کنید.
+                </p>
+            </section>
+        </main>
+    );
 }
