@@ -7,6 +7,7 @@ import {
   getNewsBySlug,
   getAllNews,
 } from "../../../components/news/news";
+import Image from "next/image";
 
 interface Props {
   params: Promise<{
@@ -58,7 +59,7 @@ export default async function NewsDetailPage({
         <article className="overflow-hidden rounded-3xl bg-white shadow-sm">
           {/* Main Image */}
           <div className="relative w-full overflow-hidden bg-gray-100">
-            <img
+            <Image
               src={news.image}
               alt={news.title}
               className="

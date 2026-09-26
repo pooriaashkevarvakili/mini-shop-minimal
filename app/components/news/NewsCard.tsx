@@ -2,6 +2,7 @@
 import Link from "next/link";
 
 import { NewsItem } from "./types";
+import Image from "next/image";
 
 interface NewsCardProps {
   news: NewsItem;
@@ -15,7 +16,7 @@ export default function NewsCard({ news }: NewsCardProps) {
     >
       <article className="h-full overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         <div className="relative h-52 w-full overflow-hidden bg-gray-100">
-          <img
+          <Image
             src={news.image}
             alt={news.title}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
