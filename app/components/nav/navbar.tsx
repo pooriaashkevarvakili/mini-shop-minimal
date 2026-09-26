@@ -43,6 +43,24 @@ export default function Navbar() {
             >
               تماس
             </Link>
+              <Link
+              href="/faq"
+              className="px-4 py-1.5 rounded-full text-gray-600 hover:text-gray-900 hover:bg-white/60 transition-colors text-sm"
+            >
+               سوالات 
+            </Link>
+                <Link
+              href="/news"
+              className="px-4 py-1.5 rounded-full text-gray-600 hover:text-gray-900 hover:bg-white/60 transition-colors text-sm"
+            >
+               اخبار 
+            </Link>
+            <Link
+              href="/shop"
+              className="px-4 py-1.5 rounded-full text-gray-600 hover:text-gray-900 hover:bg-white/60 transition-colors text-sm"
+            >
+               فروشگاه 
+            </Link>
           </nav>
 
           <div className="hidden md:flex items-center gap-3">

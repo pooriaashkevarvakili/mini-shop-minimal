@@ -54,9 +54,9 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button className="bg-gray-900 hover:bg-gray-800 text-white font-medium px-7 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
+            <Link href='/shop' className="bg-gray-900 hover:bg-gray-800 text-white font-medium px-7 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
               مشاهده محصولات
-            </button>
+            </Link>
 
               <Link
               href="/about"

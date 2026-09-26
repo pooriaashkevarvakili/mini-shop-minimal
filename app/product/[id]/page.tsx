@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, use, useEffect } from "react";
+import React, { useState, use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
@@ -18,24 +18,27 @@ export default function ProductPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = use(params);
+  const { id } = use(params);                 // ← id را از URL می‌گیرد
   const router = useRouter();
-  const product = getProductById(Number(id));
+  const product = getProductById(Number(id)); // ← محصول درست را پیدا می‌کند
 
-  const [selectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useProductSeo(product as any);
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center" dir="rtl">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50" dir="rtl">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">محصول یافت نشد</h1>
-          <Link href="/" className="text-blue-600 hover:underline">
-            بازگشت به صفحه اصلی
+          <h1 className="text-2xl font-bold mb-4 text-gray-800">
+            محصول یافت نشد
+          </h1>
+          <Link
+            href="/shop"
+            className="inline-block rounded-lg bg-black px-6 py-3 text-white hover:bg-gray-800 transition"
+          >
+            بازگشت به فروشگاه
           </Link>
         </div>
       </div>
@@ -45,7 +48,7 @@ export default function ProductPage({
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("fa-IR").format(price);
 
-  const mainImage = product.images?.[selectedImage] || product.image;
+  const mainImage = product.images?.[0] || product.image;
   const imageSrc =
     typeof mainImage === "string" ? mainImage : mainImage.src;
 
@@ -62,7 +65,7 @@ export default function ProductPage({
 
   const handleContinueShopping = () => {
     setIsModalOpen(false);
-    router.push("/");
+    router.push("/shop");
   };
 
   return (
@@ -86,6 +89,7 @@ export default function ProductPage({
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* اطلاعات محصول */}
           <div className="order-2 lg:order-1 space-y-6">
             <ProductInfo
               product={product}
@@ -96,6 +100,7 @@ export default function ProductPage({
             />
           </div>
 
+          {/* گالری تصویر */}
           <div className="order-1 lg:order-2">
             <ProductGallery
               src={imageSrc}

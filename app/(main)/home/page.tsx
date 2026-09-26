@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import Hero from "../../components/Home/Hero/Hero";
 import StatsCard from "../../components/Home/StatCard";
-import SpecialProducts from "../../components/Home/SpecialProducts";
 import MembershipBanner from "../../components/Home/MembershipBanner";
 
 export const metadata: Metadata = {
@@ -76,7 +75,6 @@ export default function Home() {
     <div className="antialiased">
       <Hero />
       <StatsCard />
-      <SpecialProducts />
       <MembershipBanner />
     </div>
   );

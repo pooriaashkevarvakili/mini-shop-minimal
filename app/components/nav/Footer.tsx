@@ -85,6 +85,21 @@ const Footer: React.FC = () => {
                   سوالات متداول
                 </a>
               </li>
+                <li>
+                <a
+                  href="/news"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
+اخبار                </a>
+              </li>
+                <li>
+                <a
+                  href="/shop"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
+ فروشگاه
+                </a>
+              </li>
               <li>
                 <a
                   href="/contact"
