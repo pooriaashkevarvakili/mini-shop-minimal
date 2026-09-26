@@ -18,9 +18,9 @@ export default function ProductPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = use(params);                 // ← id را از URL می‌گیرد
+  const { id } = use(params);           
   const router = useRouter();
-  const product = getProductById(Number(id)); // ← محصول درست را پیدا می‌کند
+  const product = getProductById(Number(id))
 
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -89,7 +89,6 @@ export default function ProductPage({
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {/* اطلاعات محصول */}
           <div className="order-2 lg:order-1 space-y-6">
             <ProductInfo
               product={product}
@@ -100,7 +99,6 @@ export default function ProductPage({
             />
           </div>
 
-          {/* گالری تصویر */}
           <div className="order-1 lg:order-2">
             <ProductGallery
               src={imageSrc}
