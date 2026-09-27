@@ -6,17 +6,17 @@ import watch from "../../public/watch.webp";
 import Dastband from "../../public/dastband3.webp";
 import glass from "../../public/glass.webp";
 import ShowRed from "../../public/shoered.webp";
-import sini from '../../public/sini.avif'
+import sini from '../../public/sini.webp'
 import bagKule from "../../public/bagkule.webp";
 import shabmotar from '../../public/shabmotar.jpeg'
-import sandal from '../../public/sandal.avif'
-import kifpull from  '../../public/kifpull.avif'
-import ghomegheme from '../../public/ghomgheme.avif'
+import sandal from '../../public/sandal.webp'
+import kifpull from  '../../public/kifpull.webp'
+import ghomegheme from '../../public/ghomgheme.webp'
 import bagBlack from "../../public/bagblack.webp";
 import camera from '../../public/camera.webp'
-import atar from '../../public/atar.avif'
+import atar from '../../public/atar.webp'
 import kifdasti from '../../public/kifdasti.webp'
-import goldan from '../../public/goldan.avif'
+import goldan from '../../public/goldan.webp'
 import cheragh from '../../public/cheragh.webp'
 import headphone from '../../public/headphone.webp'
 export type BadgeType = "new" | "bestseller" | "discount";
