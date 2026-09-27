@@ -1,34 +1,12 @@
-import React from 'react';
-import Sara from '../../../public/sara.webp'
-import Image, { StaticImageData } from "next/image";
-import Reza from '../../../public/rezaa.webp'
-import Nilufar from '../../../public/nilufarr.webp'
-interface TeamMember {
-  id: number;
-  name: string;
-  role: string;
-  image: string|StaticImageData;
-}
+import { teamSection } from "./ts/teamSection";
 
-const teamMembers: TeamMember[] = [
-  {
-    id: 1,
-    name: 'نیلوفر احمدی',
-    role: 'مسئول تجربه کاربری',
-    image:Nilufar  },
-  {
-    id: 2,
-    name: 'رضا کریمی',
-    role: 'طراح محصول',
-    image:Reza  },
-  {
-    id: 3,
-    name: 'سارا موسوی',
-    role: 'بنیان‌گذار و مدیر',
-    image:Sara  },
-];
+export default async function TeamSectionFront() {
+  const response = await teamSection();
 
-const TeamSection: React.FC = () => {
+
+  const teamMembers = response.data ?? [];
+
+
   return (
     <section
       className="w-full bg-[#fafafa] py-16 px-4"
@@ -40,7 +18,7 @@ const TeamSection: React.FC = () => {
             تیم
           </span>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-0">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
             افرادی که پشت این کار هستند
           </h2>
         </div>
@@ -53,20 +31,20 @@ const TeamSection: React.FC = () => {
             >
               <div className="relative mb-5">
                 <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-white shadow-md transition-transform duration-300 group-hover:scale-105">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
+                  <img
+                    src={member.img}
+                    alt={member.name ?? "عضو تیم"}
                     className="w-full h-full object-cover"
                   />
                 </div>
               </div>
 
               <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1">
-                {member.name}
+                {member.name ?? "بدون نام"}
               </h3>
 
               <span className="text-gray-500 text-sm">
-                {member.role}
+                {member.role ?? "عضو تیم"}
               </span>
             </div>
           ))}
@@ -74,6 +52,4 @@ const TeamSection: React.FC = () => {
       </div>
     </section>
   );
-};
-
-export default TeamSection;
+}

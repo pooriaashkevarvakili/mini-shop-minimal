@@ -1,11 +1,9 @@
 
 import type { Metadata } from "next";
-
-import AboutSection from "../../components/About/AboutSection";
-import OurStorySection from "../../components/About/OurStorySection";
-import TeamSection from "../../components/About/TeamSection";
-import ValuesSection from "../../components/About/ValuesSection";
-
+import AboutSectionFront from "./aboutSectionFront";
+import AboutStoryFront from "./aboutStoryFront";
+import TeamSectionFront from "./teamSection";
+import ValueSectionFront from './valueSectionFront'
 export const metadata: Metadata = {
   title: "درباره ما | مینیمال شاپ",
 
@@ -90,13 +88,10 @@ export default function Page() {
       lang="fa"
       className="min-h-screen"
     >
-      <AboutSection />
-
-      <OurStorySection />
-
-      <ValuesSection />
-
-      <TeamSection />
+        <AboutSectionFront />
+      <AboutStoryFront />
+      <ValueSectionFront />
+      <TeamSectionFront />
     </main>
   );
 }
