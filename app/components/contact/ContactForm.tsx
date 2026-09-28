@@ -17,57 +17,94 @@ const ContactForm = () => {
   return (
     <div
       dir="rtl"
-      className="order-2 rounded-[18px] border border-[#eee] bg-white p-6 shadow-[0_2px_20px_rgba(0,0,0,0.04)] md:p-8"
+      className="
+        order-2
+        rounded-[18px]
+        border
+        border-[#eee]
+        bg-white
+        p-6
+        shadow-[0_2px_20px_rgba(0,0,0,0.04)]
+        md:p-7
+        lg:p-8
+      "
     >
+      {/* Header */}
       <div className="mb-6 text-right">
-        <h3 className="text-lg font-bold text-[#24211f]">ارسال پیام</h3>
-        <p className="mt-1 text-[13px] text-[#999]">
+        <h3 className="text-lg font-bold text-[#24211f]">
+          ارسال پیام
+        </h3>
+
+        <p className="mt-1 text-[13px] leading-6 text-[#999]">
           فرم زیر را پر کنید، در اسرع وقت پاسخ می‌دهیم.
         </p>
       </div>
 
+      {/* Success */}
       {success && (
         <div
           role="status"
-          className="mb-5 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-right text-[13px] font-medium text-green-700"
+          className="
+            mb-5
+            rounded-xl
+            border
+            border-green-200
+            bg-green-50
+            px-4
+            py-3
+            text-right
+            text-[13px]
+            font-medium
+            leading-6
+            text-green-700
+          "
         >
           ✓ پیام شما با موفقیت ارسال شد. به‌زودی با شما تماس می‌گیریم.
         </div>
       )}
 
-      <form className="space-y-5" onSubmit={handleSubmit} noValidate>
-        <FormField
-          id="name"
-          name="name"
-          label="نام و نام‌خانوادگی"
-          required
-          autoComplete="name"
-          placeholder="علی احمدی"
-          value={form.name}
-          error={errors.name}
-          disabled={loading}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
+      {/* Form */}
+      <form
+        className="space-y-5"
+        onSubmit={handleSubmit}
+        noValidate
+      >
+        {/* Name + Email */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <FormField
+            id="name"
+            name="name"
+            label="نام و نام‌خانوادگی"
+            required
+            autoComplete="name"
+            placeholder="علی احمدی"
+            value={form.name}
+            error={errors.name}
+            disabled={loading}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
 
-        <FormField
-          id="email"
-          name="email"
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          dir="ltr"
-          align="left"
-          label="ایمیل"
-          required
-          placeholder="ali@example.com"
-          value={form.email}
-          error={errors.email}
-          disabled={loading}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
+          <FormField
+            id="email"
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            dir="ltr"
+            align="left"
+            label="ایمیل"
+            required
+            placeholder="ali@example.com"
+            value={form.email}
+            error={errors.email}
+            disabled={loading}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
 
+        {/* Subject */}
         <FormField
           id="subject"
           name="subject"
@@ -81,6 +118,7 @@ const ContactForm = () => {
           onBlur={handleBlur}
         />
 
+        {/* Message */}
         <FormField
           as="textarea"
           id="message"
@@ -95,22 +133,48 @@ const ContactForm = () => {
           onBlur={handleBlur}
         />
 
+        {/* Submit */}
         <button
           type="submit"
           disabled={loading}
           className="
-            group relative flex h-[52px] w-full items-center justify-center gap-2
-            overflow-hidden rounded-xl bg-[#24211f] text-base font-semibold text-white
-            transition-all duration-300
-            hover:bg-[#111] hover:shadow-[0_8px_20px_rgba(36,33,31,0.25)]
+            flex
+            h-[52px]
+            w-full
+            items-center
+            justify-center
+            gap-2
+            rounded-xl
+            bg-[#24211f]
+            text-base
+            font-semibold
+            text-white
+            transition-all
+            duration-300
+            hover:bg-[#111]
+            hover:shadow-[0_8px_20px_rgba(36,33,31,0.25)]
             active:scale-[0.98]
-            focus:outline-none focus:ring-4 focus:ring-[#24211f]/20
-            disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:shadow-none
+            focus:outline-none
+            focus:ring-4
+            focus:ring-[#24211f]/20
+            disabled:cursor-not-allowed
+            disabled:opacity-70
           "
         >
           {loading ? (
             <>
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+              <span
+                className="
+                  h-4
+                  w-4
+                  animate-spin
+                  rounded-full
+                  border-2
+                  border-white/30
+                  border-t-white
+                "
+              />
+
               در حال ارسال...
             </>
           ) : (
@@ -118,9 +182,10 @@ const ContactForm = () => {
           )}
         </button>
 
-        <p className="text-center text-[12px] text-[#aaa]">
+        {/* Privacy */}
+        <p className="text-center text-[12px] leading-5 text-[#aaa]">
           با ارسال این فرم، با{" "}
-          <span className="text-[#666] underline underline-offset-2">
+          <span className="cursor-pointer text-[#666] underline underline-offset-2">
             قوانین حریم خصوصی
           </span>{" "}
           موافقت می‌کنید.

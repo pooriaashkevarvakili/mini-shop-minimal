@@ -49,7 +49,7 @@ type TextareaVariant = CommonProps & {
 
 type FormFieldProps = InputVariant | TextareaVariant;
 
-export const FormField = (props: FormFieldProps) => {
+const FormField = (props: FormFieldProps) => {
   const {
     id,
     name,

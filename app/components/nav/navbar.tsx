@@ -4,18 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { HiMenu, HiX } from "react-icons/hi";
 import NavbarMobile from "./navbarMobile";
-
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
   };
-
   const closeMenu = () => {
     setIsOpen(false);
   };
-
   return (
     <header className="bg-gray-100 border-b border-gray-200 relative z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,7 +90,6 @@ export default function Navbar() {
               ثبت‌نام
             </Link>
           </div>
-
           <button
             type="button"
             onClick={toggleMenu}
@@ -106,7 +101,6 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-
       <div
         className={`md:hidden bg-white border-t border-gray-200 overflow-hidden transition-all duration-300 ease-out ${
           isOpen

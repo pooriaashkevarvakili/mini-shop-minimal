@@ -1,12 +1,16 @@
+
 import type { Metadata } from "next";
+
 import ContactHero from "../../components/contact/ContactHero";
 import ContactInfo from "../../components/contact/ContactInfo";
 import ContactForm from "../../components/contact/ContactForm";
 
 export const metadata: Metadata = {
   title: "تماس با ما | مینیمال شاپ",
+
   description:
     "برای پرسش، پیشنهاد یا دریافت اطلاعات بیشتر درباره محصولات مینیمال شاپ با ما در ارتباط باشید.",
+
   keywords: [
     "تماس با ما",
     "ارتباط با ما",
@@ -63,21 +67,28 @@ const Contact = () => {
     >
       <ContactHero />
 
-      <section className="min-h-[calc(100vh-253px)] bg-[#fafafa] px-6 py-12 md:px-[9%] md:py-[65px]">
-        <div
-          className="
-            mx-auto
-            grid
-            max-w-[880px]
-            grid-cols-1
-            items-start
-            gap-12
-            md:grid-cols-[360px_1fr]
-            md:gap-[65px]
-          "
-        >
-          <ContactInfo />
-          <ContactForm />
+      <section
+        className="
+          bg-[#fafafa]
+          px-4
+          py-10
+          sm:px-6
+          md:px-8
+          md:py-14
+          lg:px-10
+          xl:px-12
+        "
+      >
+        <div className="mx-auto w-full max-w-[1600px]">
+          {/* Contact Form */}
+          <div className="w-full">
+            <ContactForm />
+          </div>
+
+          {/* Contact Info */}
+          <div className="mt-8 w-full md:mt-10">
+            <ContactInfo />
+          </div>
         </div>
       </section>
     </main>

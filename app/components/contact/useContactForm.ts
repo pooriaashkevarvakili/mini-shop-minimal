@@ -1,120 +1,110 @@
 "use client";
 
-import { useState, type ChangeEvent, type FocusEvent, type FormEvent } from "react";
+import { useState, useCallback, type ChangeEvent, type FocusEvent, type FormEvent } from "react";
 
-export type FormFields = {
+type FormState = {
   name: string;
   email: string;
   subject: string;
   message: string;
 };
 
-type FormErrors = Partial<Record<keyof FormFields, string>>;
-type FormTouched = Partial<Record<keyof FormFields, boolean>>;
+type FormErrors = Partial<Record<keyof FormState, string>>;
 
-const validators: Record<keyof FormFields, (v: string) => string> = {
-  name: (v) => {
-    const t = v.trim();
-    if (!t) return "نام و نام‌خانوادگی الزامی است.";
-    if (t.length < 3) return "نام باید حداقل ۳ کاراکتر باشد.";
-    return "";
-  },
-  email: (v) => {
-    const t = v.trim();
-    if (!t) return "ایمیل الزامی است.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t)) return "ایمیل معتبر نیست.";
-    return "";
-  },
-  subject: (v) => {
-    const t = v.trim();
-    if (!t) return "موضوع الزامی است.";
-    if (t.length < 3) return "موضوع باید حداقل ۳ کاراکتر باشد.";
-    return "";
-  },
-  message: (v) => {
-    const t = v.trim();
-    if (!t) return "متن پیام الزامی است.";
-    if (t.length < 10) return "پیام باید حداقل ۱۰ کاراکتر باشد.";
-    return "";
-  },
-};
-
-const initialValues: FormFields = {
+const initialForm: FormState = {
   name: "",
   email: "",
   subject: "",
   message: "",
 };
 
-export const useContactForm = (onSubmitApi?: (data: FormFields) => Promise<void>) => {
-  const [form, setForm] = useState<FormFields>(initialValues);
+const validate = (form: FormState): FormErrors => {
+  const errors: FormErrors = {};
+
+  if (!form.name.trim()) {
+    errors.name = "نام و نام‌خانوادگی الزامی است";
+  }
+
+  if (!form.email.trim()) {
+    errors.email = "ایمیل الزامی است";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    errors.email = "ایمیل معتبر نیست";
+  }
+
+  if (!form.subject.trim()) {
+    errors.subject = "موضوع الزامی است";
+  }
+
+  if (!form.message.trim()) {
+    errors.message = "پیام الزامی است";
+  } else if (form.message.trim().length < 10) {
+    errors.message = "پیام باید حداقل ۱۰ کاراکتر باشد";
+  }
+
+  return errors;
+};
+
+export const useContactForm = () => {
+  const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<FormTouched>({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const validateField = (name: keyof FormFields, value: string) =>
-    validators[name](value);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setForm((prev) => ({ ...prev, [name]: value }));
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+      setSuccess(false);
+    },
+    []
+  );
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    const key = name as keyof FormFields;
-    setForm((prev) => ({ ...prev, [key]: value }));
-    if (touched[key]) {
-      setErrors((prev) => ({ ...prev, [key]: validateField(key, value) }));
-    }
-  };
+  const handleBlur = useCallback(
+    (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name } = e.target;
+      const fieldErrors = validate(form);
+      if (fieldErrors[name as keyof FormState]) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: fieldErrors[name as keyof FormState],
+        }));
+      }
+    },
+    [form]
+  );
 
-  const handleBlur = (
-    e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    const key = name as keyof FormFields;
-    setTouched((prev) => ({ ...prev, [key]: true }));
-    setErrors((prev) => ({ ...prev, [key]: validateField(key, value) }));
-  };
+  const handleSubmit = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      const validationErrors = validate(form);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
 
-    const newErrors: FormErrors = {};
-    (Object.keys(form) as Array<keyof FormFields>).forEach((key) => {
-      const err = validateField(key, form[key]);
-      if (err) newErrors[key] = err;
-    });
-
-    setErrors(newErrors);
-    setTouched({ name: true, email: true, subject: true, message: true });
-
-    if (Object.keys(newErrors).length > 0) {
-      const first = Object.keys(newErrors)[0] as keyof FormFields;
-      document.getElementById(first)?.focus();
-      return;
-    }
-
-    try {
       setLoading(true);
-      if (onSubmitApi) await onSubmitApi(form);
-      else await new Promise<void>((r) => setTimeout(r, 1200));
-
-      setSuccess(true);
-      setForm(initialValues);
-      setTouched({});
       setErrors({});
-      setTimeout(() => setSuccess(false), 4000);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+
+      try {
+        // اینجا API واقعی خودت را بگذار
+        await new Promise((resolve) => setTimeout(resolve, 1200));
+
+        setSuccess(true);
+        setForm(initialForm);
+      } catch {
+        setErrors({ message: "خطا در ارسال پیام. لطفاً دوباره تلاش کنید." });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [form]
+  );
 
   return {
     form,
     errors,
-    touched,
     loading,
     success,
     handleChange,
