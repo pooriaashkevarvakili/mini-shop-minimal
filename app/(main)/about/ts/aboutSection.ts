@@ -16,7 +16,6 @@ export async function aboutSection(): Promise<AboutResponse> {
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/about/aboutvip`;
 
-  console.log("SERVER FETCH:", url);
 
   const response = await fetch(url);
 
@@ -28,7 +27,6 @@ export async function aboutSection(): Promise<AboutResponse> {
 
   const data = (await response.json()) as AboutResponse;
 
-  console.log("SERVER DATA:", data);
 
   return data;
 }

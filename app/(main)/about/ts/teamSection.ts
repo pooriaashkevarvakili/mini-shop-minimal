@@ -17,7 +17,6 @@ export async function teamSection(): Promise<AboutResponse> {
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/team-section/all`;
 
-  console.log("TEAM URL:", url);
 
   const response = await fetch(url);
 
@@ -29,7 +28,6 @@ export async function teamSection(): Promise<AboutResponse> {
 
   const data = (await response.json()) as AboutResponse;
 
-  console.log("TEAM API DATA:", JSON.stringify(data, null, 2));
 
   return data;
 }
