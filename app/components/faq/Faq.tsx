@@ -90,7 +90,6 @@ export default function Faq() {
                   aria-controls={`faq-answer-${index}`}
                   className="flex w-full items-center justify-between gap-4 px-5 py-5 text-right outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-gray-300"
                 >
-                  {/* Question */}
                   <span className="text-sm font-bold text-gray-900 sm:text-base">
                     {faq.question}
                   </span>

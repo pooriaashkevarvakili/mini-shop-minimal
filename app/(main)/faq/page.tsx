@@ -1,11 +1,11 @@
 import SupportCard from '../../components/faq/SupportCard'
-import Faq from '../../components/faq/Faq'
 import Home from '../../components/faq/home'
+import QuestionAnswer from './faqQuestion'
 export default function page() {
     return (
         <div>
             <Home />
-            <Faq />
+            <QuestionAnswer/>
             <SupportCard />
         </div>
     )
