@@ -1,119 +1,126 @@
 "use client";
 
-import type {
-  ChangeEvent,
-  FocusEvent,
-  InputHTMLAttributes,
-  TextareaHTMLAttributes,
+import {
+  type ChangeEvent,
+  type FocusEvent,
+  type InputHTMLAttributes,
+  type TextareaHTMLAttributes,
 } from "react";
 
-const inputBase =
-  "h-[48px] w-full rounded-xl border bg-[#fafafa] px-4 text-sm outline-none transition-all duration-200 placeholder:text-[#b5b5b5] hover:bg-white focus:bg-white focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60";
-
-const normalBorder =
-  "border-[#e5e5e5] hover:border-[#d0d0d0] focus:border-[#24211f] focus:ring-[#24211f]/10";
-
-const errorBorder =
-  "border-red-400 bg-red-50/40 hover:border-red-400 focus:border-red-500 focus:ring-red-500/10";
-
-const labelBase =
-  "mb-2 block text-right text-[13px] font-medium text-[#444]";
-
-type CommonProps = {
+type FormFieldProps = {
+  as?: "input" | "textarea";
   id: string;
   name: string;
   label: string;
-  required?: boolean;
   error?: string;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onBlur: (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  required?: boolean;
   disabled?: boolean;
-};
-
-type InputVariant = CommonProps & {
-  as?: "input";
+  placeholder?: string;
+  value: string;
+  onChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onBlur: (
+    e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   type?: InputHTMLAttributes<HTMLInputElement>["type"];
-  dir?: "ltr" | "rtl";
-  align?: "left" | "right";
-  autoComplete?: string;
   inputMode?: InputHTMLAttributes<HTMLInputElement>["inputMode"];
-  placeholder?: string;
+  autoComplete?: string;
+  dir?: "ltr" | "rtl" | "auto";
+  align?: "left" | "right" | "center";
 };
 
-type TextareaVariant = CommonProps & {
-  as: "textarea";
-  rows?: number;
-  placeholder?: string;
-};
-
-type FormFieldProps = InputVariant | TextareaVariant;
-
-const FormField = (props: FormFieldProps) => {
-  const {
-    id,
-    name,
-    label,
-    required,
-    error,
-    value,
-    onChange,
-    onBlur,
-    disabled,
-    placeholder,
-  } = props;
-
-  const extra =
-    props.as === "textarea"
-      ? "h-[130px] resize-none py-3 text-right leading-7"
-      : props.align === "left"
-        ? "text-left placeholder:text-left"
-        : "text-right";
-
-  const inputClass = `${inputBase} ${error ? errorBorder : normalBorder} ${extra}`;
+const FormField = ({
+  as = "input",
+  id,
+  name,
+  label,
+  error,
+  required = false,
+  disabled = false,
+  placeholder,
+  value,
+  onChange,
+  onBlur,
+  type = "text",
+  inputMode,
+  autoComplete,
+  dir,
+  align,
+}: FormFieldProps) => {
+  const commonClassName = `
+    mt-2
+    w-full
+    rounded-xl
+    border
+    bg-white
+    px-4
+    text-sm
+    text-[#24211f]
+    outline-none
+    transition-all
+    duration-200
+    placeholder:text-[#b5b5b5]
+    disabled:cursor-not-allowed
+    disabled:bg-[#f8f8f8]
+    ${
+      error
+        ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-500/10"
+        : "border-[#e8e8e8] focus:border-[#24211f] focus:ring-4 focus:ring-[#24211f]/10"
+    }
+  `;
 
   return (
-    <div>
-      <label htmlFor={id} className={labelBase}>
-        {label} {required && <span className="text-red-500">*</span>}
+    <div className="w-full text-right">
+      <label
+        htmlFor={id}
+        className="text-sm font-medium text-[#24211f]"
+      >
+        {label}
+
+        {required && (
+          <span className="mr-1 text-red-500">*</span>
+        )}
       </label>
 
-      {props.as === "textarea" ? (
+      {as === "textarea" ? (
         <textarea
           id={id}
           name={name}
           value={value}
+          placeholder={placeholder}
+          disabled={disabled}
+          required={required}
           onChange={onChange}
           onBlur={onBlur}
-          disabled={disabled}
-          placeholder={placeholder}
-          aria-invalid={!!error}
-          aria-describedby={error ? `${id}-error` : undefined}
-          className={inputClass}
+          dir={dir}
+          className={`${commonClassName} min-h-[150px] resize-none py-3 leading-7`}
         />
       ) : (
         <input
           id={id}
           name={name}
-          type={props.type ?? "text"}
-          dir={props.dir}
+          type={type}
           value={value}
+          placeholder={placeholder}
+          disabled={disabled}
+          required={required}
           onChange={onChange}
           onBlur={onBlur}
-          disabled={disabled}
-          autoComplete={props.autoComplete}
-          inputMode={props.inputMode}
-          placeholder={placeholder}
-          aria-invalid={!!error}
-          aria-describedby={error ? `${id}-error` : undefined}
-          className={inputClass}
+          inputMode={inputMode}
+          autoComplete={autoComplete}
+          dir={dir}
+          style={{
+            textAlign: align,
+          }}
+          className={`${commonClassName} h-12`}
         />
       )}
 
       {error && (
         <p
-          id={`${id}-error`}
-          className="mt-1.5 text-right text-[12px] text-red-500"
+          role="alert"
+          className="mt-1.5 text-xs leading-5 text-red-500"
         >
           {error}
         </p>

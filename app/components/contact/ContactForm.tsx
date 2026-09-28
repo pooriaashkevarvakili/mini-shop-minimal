@@ -29,7 +29,6 @@ const ContactForm = () => {
         lg:p-8
       "
     >
-      {/* Header */}
       <div className="mb-6 text-right">
         <h3 className="text-lg font-bold text-[#24211f]">
           ارسال پیام
@@ -40,7 +39,6 @@ const ContactForm = () => {
         </p>
       </div>
 
-      {/* Success */}
       {success && (
         <div
           role="status"
@@ -59,17 +57,16 @@ const ContactForm = () => {
             text-green-700
           "
         >
-          ✓ پیام شما با موفقیت ارسال شد. به‌زودی با شما تماس می‌گیریم.
+          ✓ پیام شما با موفقیت ارسال شد. به‌زودی با شما تماس
+          می‌گیریم.
         </div>
       )}
 
-      {/* Form */}
       <form
         className="space-y-5"
         onSubmit={handleSubmit}
         noValidate
       >
-        {/* Name + Email */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <FormField
             id="name"
@@ -104,7 +101,6 @@ const ContactForm = () => {
           />
         </div>
 
-        {/* Subject */}
         <FormField
           id="subject"
           name="subject"
@@ -118,7 +114,6 @@ const ContactForm = () => {
           onBlur={handleBlur}
         />
 
-        {/* Message */}
         <FormField
           as="textarea"
           id="message"
@@ -133,7 +128,6 @@ const ContactForm = () => {
           onBlur={handleBlur}
         />
 
-        {/* Submit */}
         <button
           type="submit"
           disabled={loading}
@@ -181,15 +175,6 @@ const ContactForm = () => {
             "ارسال پیام"
           )}
         </button>
-
-        {/* Privacy */}
-        <p className="text-center text-[12px] leading-5 text-[#aaa]">
-          با ارسال این فرم، با{" "}
-          <span className="cursor-pointer text-[#666] underline underline-offset-2">
-            قوانین حریم خصوصی
-          </span>{" "}
-          موافقت می‌کنید.
-        </p>
       </form>
     </div>
   );

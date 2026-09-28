@@ -1,13 +1,18 @@
 "use client";
 
-import { useState, useCallback, type ChangeEvent, type FocusEvent, type FormEvent } from "react";
+import {
+  useState,
+  useCallback,
+  type ChangeEvent,
+  type FocusEvent,
+  type FormEvent,
+} from "react";
 
-type FormState = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
+import ContactFormApi, {
+  type ContactFormData,
+} from "../hooks/contactForm";
+
+type FormState = ContactFormData;
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
@@ -46,28 +51,48 @@ const validate = (form: FormState): FormErrors => {
 
 export const useContactForm = () => {
   const [form, setForm] = useState<FormState>(initialForm);
+
   const [errors, setErrors] = useState<FormErrors>({});
+
   const [loading, setLoading] = useState(false);
+
   const [success, setSuccess] = useState(false);
 
   const handleChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (
+      e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
       const { name, value } = e.target;
-      setForm((prev) => ({ ...prev, [name]: value }));
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+
+      setForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+
+      setErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }));
+
       setSuccess(false);
     },
     []
   );
 
   const handleBlur = useCallback(
-    (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (
+      e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
       const { name } = e.target;
+
       const fieldErrors = validate(form);
-      if (fieldErrors[name as keyof FormState]) {
+
+      const fieldName = name as keyof FormState;
+
+      if (fieldErrors[fieldName]) {
         setErrors((prev) => ({
           ...prev,
-          [name]: fieldErrors[name as keyof FormState],
+          [name]: fieldErrors[fieldName],
         }));
       }
     },
@@ -75,8 +100,9 @@ export const useContactForm = () => {
   );
 
   const handleSubmit = useCallback(
-    async (e: FormEvent) => {
+    async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
       const validationErrors = validate(form);
 
       if (Object.keys(validationErrors).length > 0) {
@@ -86,15 +112,24 @@ export const useContactForm = () => {
 
       setLoading(true);
       setErrors({});
+      setSuccess(false);
 
       try {
-        // اینجا API واقعی خودت را بگذار
-        await new Promise((resolve) => setTimeout(resolve, 1200));
+        await ContactFormApi(form);
 
         setSuccess(true);
+
         setForm(initialForm);
-      } catch {
-        setErrors({ message: "خطا در ارسال پیام. لطفاً دوباره تلاش کنید." });
+      } catch (error: any) {
+        console.error("Contact form error:", error);
+
+        const message =
+          error?.response?.data?.message ||
+          "خطا در ارسال پیام. لطفاً دوباره تلاش کنید.";
+
+        setErrors({
+          message,
+        });
       } finally {
         setLoading(false);
       }
