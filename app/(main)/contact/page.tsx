@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 import ContactHero from "../../components/contact/ContactHero";
-import ContactInfo from "../../components/contact/ContactInfo";
+import ContactInfo from "./ContactInfo";
 import ContactForm from "../../components/contact/ContactForm";
 
 export const metadata: Metadata = {
@@ -80,12 +80,10 @@ const Contact = () => {
         "
       >
         <div className="mx-auto w-full max-w-[1600px]">
-          {/* Contact Form */}
           <div className="w-full">
             <ContactForm />
           </div>
 
-          {/* Contact Info */}
           <div className="mt-8 w-full md:mt-10">
             <ContactInfo />
           </div>
