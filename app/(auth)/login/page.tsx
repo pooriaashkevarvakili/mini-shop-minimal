@@ -1,24 +1,133 @@
-'use client';
 
-import React, { useState } from 'react';
-import { Form, Input, Button, Divider, message } from 'antd';
-import { GoogleOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+"use client";
 
-export default function LoginPage() {
-  const [loading, setLoading] = useState(false);
+import { useState } from "react";
+import { FiEye, FiEyeOff, FiLock, FiMail } from "react-icons/fi";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import api from "../../../axios/axios";
+
+interface FormData {
+  email: string;
+  password: string;
+}
+
+interface LoginResponse {
+  message?: string;
+  user?: {
+    id: number;
+    username: string;
+    email: string;
+  };
+}
+
+export default function Login() {
   const router = useRouter();
 
-  const onFinish = async (values: { email: string; password: string }) => {
-    setLoading(true);
-    console.log('Login values:', values);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-    setTimeout(() => {
-      message.success('ورود با موفقیت انجام شد!');
+  const [formData, setFormData] = useState<FormData>({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [serverError, setServerError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+
+    setServerError("");
+    setSuccessMessage("");
+  };
+
+  const validate = () => {
+    let isValid = true;
+
+    const newErrors = {
+      email: "",
+      password: "",
+    };
+
+    if (!formData.email.trim()) {
+      newErrors.email = "لطفاً ایمیل را وارد کنید";
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "ایمیل معتبر نیست";
+      isValid = false;
+    }
+
+    if (!formData.password) {
+      newErrors.password = "لطفاً رمز عبور را وارد کنید";
+      isValid = false;
+    } else if (formData.password.length < 6) {
+      newErrors.password = "رمز عبور باید حداقل ۶ کاراکتر باشد";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    return isValid;
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (loading) return;
+
+    setServerError("");
+    setSuccessMessage("");
+
+    if (!validate()) return;
+
+    try {
+      setLoading(true);
+
+      const response = await api.post<LoginResponse>(
+        "/auth/signin",
+        {
+          email: formData.email.trim().toLowerCase(),
+          password: formData.password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      setSuccessMessage(
+        response.data?.message || "ورود با موفقیت انجام شد!"
+      );
+
+      setTimeout(() => {
+        router.push("/");
+      }, 500);
+    } catch (error: any) {
+      const message =
+        error?.response?.data?.message ||
+        error?.response?.data?.detail ||
+        error?.message ||
+        "ایمیل یا رمز عبور اشتباه است.";
+
+      setServerError(message);
+    } finally {
       setLoading(false);
-     
-    }, 800);
+    }
   };
 
   return (
@@ -27,102 +136,187 @@ export default function LoginPage() {
       dir="rtl"
     >
       <div className="w-full max-w-[420px]">
-        <div className="flex justify-center mb-6">
-          <div className="w-14 h-14 bg-black rounded-2xl flex items-center justify-center shadow-lg">
-            <span className="text-white text-2xl font-bold">م</span>
-          </div>
-        </div>
 
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">ورود به حساب</h1>
-          <p className="text-gray-500 text-sm">خوش برگشتید !</p>
-        </div>
-
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <div className="bg-amber-50 border border-amber-200 text-amber-700 text-sm rounded-xl px-4 py-3 mb-6 text-center">
-            تست: هر ایمیل و رمزی وارد کنید – وارد می‌شوید!
+        {/* Header */}
+        <div className="text-center mb-6">
+          <div className="mx-auto mb-4 w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center text-xl font-bold">
+            م
           </div>
 
-          <Form
-            name="login"
-            layout="vertical"
-            onFinish={onFinish}
-            requiredMark={false}
-            size="large"
-          >
-            <Form.Item
-              name="email"
-              label={<span className="text-gray-700 font-medium">ایمیل</span>}
-              rules={[
-                { required: true, message: 'لطفاً ایمیل را وارد کنید' },
-                { type: 'email', message: 'ایمیل معتبر نیست' },
-              ]}
-            >
-              <Input
-                placeholder="ali@example.com"
-                prefix={<MailOutlined className="text-gray-400" />}
-                className="rounded-xl h-12"
-              />
-            </Form.Item>
+          <h1 className="text-2xl font-bold text-gray-900">
+            ورود به حساب
+          </h1>
 
-            <Form.Item
-              name="password"
-              label={
-                <div className="flex justify-between w-full items-center">
-                  <span className="text-gray-700 font-medium">رمز عبور</span>
-                  <Link
-                    href="/forgot-password"
-                    className="text-sm text-gray-500 hover:text-black transition"
-                  >
-                    فراموشی رمز
-                  </Link>
-                </div>
-              }
-              rules={[{ required: true, message: 'لطفاً رمز عبور را وارد کنید' }]}
-            >
-              <Input.Password
-                placeholder="••••••••"
-                prefix={<LockOutlined className="text-gray-400" />}
-                className="rounded-xl h-12"
-              />
-            </Form.Item>
+          <p className="text-sm text-gray-500 mt-2">
+            خوش برگشتید!
+          </p>
+        </div>
 
-            <Form.Item className="mb-6">
-              <Button
-                type="primary"
-                htmlType="submit"
-                loading={loading}
-                block
-                className="h-12 rounded-xl bg-black hover:!bg-gray-800 border-none font-medium text-base"
+        {/* Card */}
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+          <form onSubmit={onSubmit} className="space-y-5">
+
+            {/* Email */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
-                ورود
-              </Button>
-            </Form.Item>
-          </Form>
+                ایمیل
+              </label>
 
-          <Divider plain className="text-gray-400 text-sm my-6">
-            یا ورود با
-          </Divider>
+              <div className="relative">
+                <FiMail
+                  size={19}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
+                />
 
-          <Button
-            block
-            size="large"
-            icon={<GoogleOutlined style={{ fontSize: 18 }} />}
-            className="h-12 rounded-xl border-gray-200 hover:border-gray-400 hover:bg-gray-50 flex items-center justify-center gap-2 font-medium"
-            onClick={() => message.info('ورود با گوگل (دمو)')}
-          >
-            ورود با Google
-          </Button>
-        </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  disabled={loading}
+                  placeholder="example@email.com"
+                  className={`w-full h-12 rounded-xl border bg-white pr-11 pl-4 outline-none transition
+                    ${
+                      errors.email
+                        ? "border-red-500 focus:ring-2 focus:ring-red-100"
+                        : "border-gray-300 focus:border-black focus:ring-2 focus:ring-gray-100"
+                    }
+                    disabled:bg-gray-100 disabled:cursor-not-allowed
+                  `}
+                />
+              </div>
 
-        <div className="text-center mt-8 text-sm text-gray-600">
-          حساب ندارید؟{' '}
-          <Link
-            href="/signup"
-            className="text-black font-medium hover:underline"
-          >
-            ثبت‌نام کنید
-          </Link>
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-2">
+                  {errors.email}
+                </p>
+              )}
+            </div>
+
+            {/* Password */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                رمز عبور
+              </label>
+
+              <div className="relative">
+                {/* Lock Icon */}
+                <FiLock
+                  size={19}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
+                />
+
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={handleChange}
+                  disabled={loading}
+                  placeholder="رمز عبور خود را وارد کنید"
+                  className={`w-full h-12 rounded-xl border bg-white pr-11 pl-12 outline-none transition
+                    ${
+                      errors.password
+                        ? "border-red-500 focus:ring-2 focus:ring-red-100"
+                        : "border-gray-300 focus:border-black focus:ring-2 focus:ring-gray-100"
+                    }
+                    disabled:bg-gray-100 disabled:cursor-not-allowed
+                  `}
+                />
+
+                {/* Eye */}
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowPassword((prev) => !prev)
+                  }
+                  disabled={loading}
+                  aria-label={
+                    showPassword
+                      ? "مخفی کردن رمز عبور"
+                      : "نمایش رمز عبور"
+                  }
+                  className="absolute left-0 inset-y-0 px-4 flex items-center text-gray-400 hover:text-gray-700 transition disabled:cursor-not-allowed"
+                >
+                  {showPassword ? (
+                    <FiEyeOff size={19} />
+                  ) : (
+                    <FiEye size={19} />
+                  )}
+                </button>
+              </div>
+
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-2">
+                  {errors.password}
+                </p>
+              )}
+            </div>
+
+            {/* Forgot Password */}
+            <div className="flex justify-start">
+              <Link
+                href="/forgot-password"
+                className="text-sm text-gray-600 hover:text-black transition"
+              >
+                رمز عبور را فراموش کرده‌اید؟
+              </Link>
+            </div>
+
+            {/* Server Error */}
+            {serverError && (
+              <div className="rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm p-3">
+                {serverError}
+              </div>
+            )}
+
+            {/* Success */}
+            {successMessage && (
+              <div className="rounded-xl bg-green-50 border border-green-200 text-green-600 text-sm p-3">
+                {successMessage}
+              </div>
+            )}
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full h-12 rounded-xl bg-black text-white font-medium hover:bg-gray-800 transition disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center"
+            >
+              {loading ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                "ورود"
+              )}
+            </button>
+
+            {/* Divider */}
+            <div className="flex items-center gap-3">
+              <div className="h-px bg-gray-200 flex-1" />
+              <span className="text-xs text-gray-400">
+                یا ورود با
+              </span>
+              <div className="h-px bg-gray-200 flex-1" />
+            </div>
+
+            {/* Signup */}
+            <p className="text-center text-sm text-gray-500">
+              حساب کاربری ندارید؟{" "}
+              <Link
+                href="/signup"
+                className="text-black font-medium hover:underline"
+              >
+                ثبت‌نام کنید
+              </Link>
+            </p>
+          </form>
         </div>
       </div>
     </div>
