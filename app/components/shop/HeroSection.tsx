@@ -12,29 +12,24 @@ const HeroSection: React.FC = () => {
       className="relative w-full min-h-[420px] md:min-h-[480px] bg-[#1a1a1a] overflow-hidden flex items-center"
       dir="rtl"
     >
-      {/* Decorative circle on the left */}
       <div className="absolute left-[-80px] top-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[420px] md:h-[420px] rounded-full border border-white/10 pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <div className="max-w-2xl mr-auto text-right">
-          {/* فروشگاه */}
-          <Text className="!text-white/60 !text-sm md:!text-base !font-normal mb-4 block">
+          <span className="!text-white/60 !text-sm md:!text-base !font-normal mb-4 block">
             فروشگاه
-          </Text>
+          </span>
 
-          {/* عنوان اصلی */}
-          <Title
-            level={1}
+          <span
             className="!text-white !text-3xl md:!text-5xl lg:!text-[3.25rem] !font-bold !leading-tight !mb-5 !mt-0"
-          >
+          >s cl
             برای یک زندگی ساده‌تر
-          </Title>
+          </span>
 
-          {/* توضیحات */}
-          <Paragraph className="!text-white/70 !text-base md:!text-lg !leading-relaxed !mb-0 !max-w-xl">
+          <span className="!text-white/70 !text-base md:!text-lg !leading-relaxed !mb-0 !max-w-xl">
             بیست محصول کاربردی، بادوام و خوش‌ساخت؛ انتخاب‌شده برای اینکه هر روز از
             داشتنشان لذت ببرید.
-          </Paragraph>
+          </span>
         </div>
       </div>
     </section>

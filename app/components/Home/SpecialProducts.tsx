@@ -46,7 +46,6 @@ export default function SpecialProducts() {
               key={product.id}
               className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
             >
-              {/* تصویر - لینک به صفحه محصول */}
               <Link href={`/product/${product.id}`}>
                 <div className="relative aspect-square overflow-hidden bg-gray-100 cursor-pointer">
                   <img

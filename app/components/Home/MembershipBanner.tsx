@@ -1,11 +1,11 @@
-'use client'
-import React from "react";
-import { Button } from "antd";
+
+'use client';
+
+import React from 'react';
 
 const MembershipBanner: React.FC = () => {
   const handleRegister = () => {
-    console.log("Register clicked");
-    
+    console.log('Register clicked');
   };
 
   return (
@@ -60,30 +60,29 @@ const MembershipBanner: React.FC = () => {
             شوید.
           </p>
 
-          <Button
-            type="default"
+          <button
+            type="button"
             onClick={handleRegister}
             className="
               mt-7
-              !h-[48px]
-              !min-w-[150px]
-              !rounded-[12px]
-              !border-0
-              !bg-white
-              !px-7
-              !text-[15px]
-              !font-bold
-              !text-[#24211f]
+              h-[48px]
+              min-w-[150px]
+              rounded-[12px]
+              border-0
+              bg-white
+              px-7
+              text-[15px]
+              font-bold
+              text-[#24211f]
               shadow-none
               transition-all
               duration-200
-              hover:!bg-[#f1f1f1]
-              hover:!text-[#24211f]
-              active:!bg-[#e7e7e7]
+              hover:bg-[#f1f1f1]
+              active:bg-[#e7e7e7]
             "
           >
             ثبت‌نام رایگان
-          </Button>
+          </button>
         </div>
       </div>
     </section>
