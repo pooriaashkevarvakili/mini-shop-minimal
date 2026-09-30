@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import Hero from "../../components/Home/Hero/Hero";
-import StatsCard from "../../components/Home/StatCard";
 import MembershipBanner from "../../components/Home/MembershipBanner";
+import StatsBanner from "./StatsBanner";
 
 export const metadata: Metadata = {
   title: {
@@ -74,7 +74,7 @@ export default function Home() {
   return (
     <div className="antialiased">
       <Hero />
-      <StatsCard />
+      <StatsBanner />
       <MembershipBanner />
     </div>
   );
