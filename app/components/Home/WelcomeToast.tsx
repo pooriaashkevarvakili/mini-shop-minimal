@@ -29,7 +29,6 @@ export default function WelcomeToast() {
     const getUser = async () => {
      
       try {
-        console.log("🌐 Calling GET /auth/me");
 
         const response = await api.get<MeResponse>("/auth/me");
 
@@ -66,7 +65,7 @@ export default function WelcomeToast() {
         if (status === 401) {
     
 
-          router.replace("/signup");
+          router.replace("/login");
 
           return;
         }
