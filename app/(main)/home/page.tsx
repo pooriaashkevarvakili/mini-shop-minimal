@@ -1,16 +1,21 @@
+
 import type { Metadata } from "next";
 
 import Hero from "../../components/Home/Hero/Hero";
 import MembershipBanner from "../../components/Home/MembershipBanner";
 import StatsBanner from "./StatsBanner";
 
+
+
 export const metadata: Metadata = {
   title: {
     default: "Your Brand | Premium Products & Membership",
     template: "%s | Your Brand",
   },
+
   description:
     "Discover premium products, exclusive offers, and membership benefits at Your Brand.",
+
   keywords: [
     "premium products",
     "online store",
@@ -18,6 +23,7 @@ export const metadata: Metadata = {
     "membership",
     "special offers",
   ],
+
   authors: [{ name: "Your Brand" }],
   creator: "Your Brand",
   publisher: "Your Brand",
@@ -25,6 +31,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
@@ -39,9 +46,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://example.com",
     siteName: "Your Brand",
+
     title: "Your Brand | Premium Products & Membership",
+
     description:
       "Discover premium products, exclusive offers, and membership benefits at Your Brand.",
+
     images: [
       {
         url: "https://example.com/og-image.jpg",
@@ -54,9 +64,12 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
+
     title: "Your Brand | Premium Products & Membership",
+
     description:
       "Discover premium products, exclusive offers, and membership benefits at Your Brand.",
+
     images: ["https://example.com/og-image.jpg"],
   },
 
@@ -72,10 +85,16 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="antialiased">
+    <main className="min-h-screen antialiased">
+     
+
       <Hero />
+
       <StatsBanner />
+
       <MembershipBanner />
-    </div>
+
+    
+    </main>
   );
 }

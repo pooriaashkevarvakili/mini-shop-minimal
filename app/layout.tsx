@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { yekanBakh } from "./fonts";
 import Providers from "./providers";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Next.js Learn Portfolio",
@@ -74,6 +75,16 @@ export default function RootLayout({
       >
         <Providers>
           {children}
+           <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            pauseOnHover
+            draggable
+            theme="dark"
+          />
         </Providers>
       </body>
     </html>
