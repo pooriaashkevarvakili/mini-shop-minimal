@@ -1,35 +1,35 @@
 "use client";
 
-import React from "react";
-import { FiPlus, FiMinus } from "react-icons/fi";
+import {
+  FiPlus,
+  FiMinus,
+} from "react-icons/fi";
 
-type Props = {
+interface Props {
   quantity: number;
-  setQuantity: React.Dispatch<React.SetStateAction<number>>;
   stock: number;
-};
+  onIncrease: () => void;
+  onDecrease: () => void;
+}
 
 export default function QuantitySelector({
   quantity,
-  setQuantity,
   stock,
+  onIncrease,
+  onDecrease,
 }: Props) {
-  const decreaseQuantity = () => {
-    setQuantity((current) => Math.max(1, current - 1));
-  };
-
-  const increaseQuantity = () => {
-    if (stock <= 0) return;
-
-    setQuantity((current) => Math.min(stock, current + 1));
-  };
-
-  const isMin = quantity <= 1;
-  const isMax = quantity >= stock;
   const isDisabled = stock <= 0;
 
+  const isMin =
+    quantity <= 1;
+
+  const isMax =
+    stock > 0 &&
+    quantity >= stock;
+
   return (
-    <div>
+    <div dir="rtl">
+      {/* Header */}
       <div className="mb-3 flex items-center justify-between">
         <div>
           <p className="text-sm font-semibold text-gray-800">
@@ -46,20 +46,28 @@ export default function QuantitySelector({
         </span>
       </div>
 
+      {/* Quantity selector */}
       <div className="flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-1">
+        {/* Increase */}
         <button
           type="button"
-          onClick={increaseQuantity}
-          disabled={isMax || isDisabled}
-          className="flex h-11 w-11 items-center justify-center rounded-xl text-gray-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
+          disabled={
+            isDisabled || isMax
+          }
+          onClick={onIncrease}
           aria-label="افزایش تعداد"
+          className="flex h-11 w-11 items-center justify-center rounded-xl text-gray-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-300"
         >
-          <FiPlus size={20} strokeWidth={2} />
+          <FiPlus
+            size={20}
+            strokeWidth={2}
+          />
         </button>
 
+        {/* Current quantity */}
         <div className="flex flex-1 flex-col items-center justify-center">
           <span className="text-lg font-bold text-gray-900">
-            {quantity}
+            {isDisabled ? 0 : quantity}
           </span>
 
           <span className="text-[11px] text-gray-400">
@@ -67,23 +75,31 @@ export default function QuantitySelector({
           </span>
         </div>
 
+        {/* Decrease */}
         <button
           type="button"
-          onClick={decreaseQuantity}
-          disabled={isMin || isDisabled}
-          className="flex h-11 w-11 items-center justify-center rounded-xl text-gray-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
+          disabled={
+            isDisabled || isMin
+          }
+          onClick={onDecrease}
           aria-label="کاهش تعداد"
+          className="flex h-11 w-11 items-center justify-center rounded-xl text-gray-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-300"
         >
-          <FiMinus size={20} strokeWidth={2} />
+          <FiMinus
+            size={20}
+            strokeWidth={2}
+          />
         </button>
       </div>
 
+      {/* Max stock message */}
       {!isDisabled && isMax && (
         <p className="mt-2 text-xs text-gray-400">
           حداکثر تعداد قابل سفارش انتخاب شده است.
         </p>
       )}
 
+      {/* Out of stock */}
       {isDisabled && (
         <p className="mt-2 text-xs text-gray-500">
           این محصول در حال حاضر موجود نیست.

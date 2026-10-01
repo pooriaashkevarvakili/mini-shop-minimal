@@ -1,15 +1,15 @@
 "use client";
 
-import React from "react";
-import Image, { StaticImageData } from "next/image";
-import type { Product } from "../../../data/product";
+import Image from "next/image";
+
+import type { Product } from "../../../(main)/shop/type/product";
 
 interface Props {
   open: boolean;
   onCancel: () => void;
   product: Product;
   quantity: number;
-  imageSrc: string | StaticImageData;
+  imageSrc: string;
   onCompletePurchase: () => void;
   onContinueShopping: () => void;
   formatPrice: (price: number) => string;
@@ -29,7 +29,8 @@ export default function PurchaseModal({
     return null;
   }
 
-  const totalPrice = product.price * quantity;
+  const totalPrice =
+    product.price * quantity;
 
   return (
     <div
@@ -61,7 +62,10 @@ export default function PurchaseModal({
             ×
           </button>
         </div>
+
+        {/* Content */}
         <div className="p-5">
+          {/* Product */}
           <div className="flex items-center gap-4">
             <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-gray-50">
               <Image
@@ -70,6 +74,7 @@ export default function PurchaseModal({
                 fill
                 sizes="96px"
                 className="object-contain p-2"
+                unoptimized
               />
             </div>
 
@@ -83,11 +88,14 @@ export default function PurchaseModal({
               </p>
 
               <p className="mt-1 text-xs text-gray-400">
-                قیمت واحد: {formatPrice(product.price)} تومان
+                قیمت واحد:{" "}
+                {formatPrice(product.price)}{" "}
+                تومان
               </p>
             </div>
           </div>
 
+          {/* Total */}
           <div className="mt-5 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-500">

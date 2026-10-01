@@ -1,10 +1,5 @@
-"use client";
-
-import React from "react";
-import Image, { StaticImageData } from "next/image";
-
 interface Props {
-  src: string | StaticImageData;
+  src: string;
   alt: string;
   priority?: boolean;
 }
@@ -14,17 +9,23 @@ export default function ProductGallery({
   alt,
   priority = false,
 }: Props) {
+  const imageSrc =
+    src.startsWith("http://") ||
+    src.startsWith("https://") ||
+    src.startsWith("/")
+      ? src
+      : `/${src}`;
+
   return (
     <div className="sticky top-6">
       <div className="relative overflow-hidden rounded-3xl border border-gray-100 bg-white">
         <div className="relative aspect-square w-full">
-          <Image
-            src={src}
+          <img
+            src={imageSrc}
             alt={alt}
-            fill
-            priority={priority}
-            className="object-contain p-8 sm:p-12"
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="h-full w-full object-contain p-8 sm:p-12"
+            loading={priority ? "eager" : "lazy"}
+            decoding="async"
           />
         </div>
       </div>
