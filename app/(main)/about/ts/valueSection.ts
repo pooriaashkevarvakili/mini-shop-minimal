@@ -1,6 +1,8 @@
 import "server-only";
 
 import { cacheLife, cacheTag } from "next/cache";
+import { redirect } from "next/navigation";
+
 import type { ValueSectionItem } from "../types/valueSection";
 
 export type ValueSectionResponse = {
@@ -18,6 +20,12 @@ export async function ValueSection(): Promise<ValueSectionResponse> {
 
   const response = await fetch(url);
 
+  // کاربر لاگین نیست
+  if (response.status === 401) {
+    redirect("/login");
+  }
+
+  // سایر خطاهای API
   if (!response.ok) {
     throw new Error(
       `Failed to fetch value section: ${response.status} ${response.statusText}`

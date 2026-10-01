@@ -5,6 +5,7 @@ import {
   getNewsBySlug,
   getAllNews,
 } from "../ts/newsslug";
+import WelcomeToast from "@/app/components/Home/WelcomeToast";
 
 interface Props {
   params: Promise<{
@@ -29,6 +30,8 @@ export default async function NewsDetailPage({ params }: Props) {
   }
 
   return (
+  <>
+  <WelcomeToast/>
     <main
       dir="rtl"
       className="min-h-screen bg-gray-50 px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
@@ -158,5 +161,6 @@ export default async function NewsDetailPage({ params }: Props) {
         </article>
       </div>
     </main>
+  </>
   );
 }

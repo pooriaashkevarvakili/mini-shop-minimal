@@ -1,9 +1,9 @@
-
 import type { Metadata } from "next";
 
 import ContactHero from "../../components/contact/ContactHero";
 import ContactInfo from "./ContactInfo";
 import ContactForm from "../../components/contact/ContactForm";
+import WelcomeToast from "../../components/Home/WelcomeToast";
 
 export const metadata: Metadata = {
   title: "تماس با ما | مینیمال شاپ",
@@ -38,8 +38,10 @@ export const metadata: Metadata = {
     url: "https://minimalshop.ir/contact",
     siteName: "مینیمال شاپ",
     title: "تماس با ما | مینیمال شاپ",
+
     description:
       "برای پرسش، پیشنهاد یا دریافت اطلاعات بیشتر درباره محصولات مینیمال شاپ با ما در ارتباط باشید.",
+
     images: [
       {
         url: "https://minimalshop.ir/images/og-contact.jpg",
@@ -53,8 +55,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "تماس با ما | مینیمال شاپ",
+
     description:
       "برای پرسش، پیشنهاد یا دریافت اطلاعات بیشتر درباره محصولات مینیمال شاپ با ما در ارتباط باشید.",
+
     images: ["https://minimalshop.ir/images/og-contact.jpg"],
   },
 };
@@ -65,6 +69,8 @@ const Contact = () => {
       dir="rtl"
       className="min-h-screen bg-white font-sans text-[#222]"
     >
+      <WelcomeToast />
+
       <ContactHero />
 
       <section

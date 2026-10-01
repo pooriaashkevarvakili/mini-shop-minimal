@@ -141,14 +141,7 @@ export default function LoginForm() {
               error={errors.password}
             />
 
-            <div className="flex justify-start">
-              <Link
-                href="/forgot-password"
-                className="text-sm text-gray-600 hover:text-black transition"
-              >
-                رمز عبور را فراموش کرده‌اید؟
-              </Link>
-            </div>
+       
 
             {serverError && (
               <AlertMessage type="error" message={serverError} />

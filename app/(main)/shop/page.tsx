@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import ShopPageClient from "./ShopPageClient";
+import WelcomeToast from "@/app/components/Home/WelcomeToast";
 
 function ShopLoading() {
   return (
@@ -48,6 +49,7 @@ function ShopLoading() {
 export default function ShopPage() {
   return (
     <Suspense fallback={<ShopLoading />}>
+      <WelcomeToast/>
       <ShopPageClient />
     </Suspense>
   );

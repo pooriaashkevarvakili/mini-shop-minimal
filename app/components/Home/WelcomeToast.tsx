@@ -27,16 +27,10 @@ export default function WelcomeToast() {
     hasFetched.current = true;
 
     const getUser = async () => {
-     
       try {
-
         const response = await api.get<MeResponse>("/auth/me");
 
-      
-
         const user = response.data?.user;
-
-  
 
         if (!user) {
           console.log("❌ No user found.");
@@ -59,18 +53,14 @@ export default function WelcomeToast() {
       } catch (error: any) {
         const status = error?.response?.status;
 
-        
-
-      
         if (status === 401) {
-    
+          console.log("❌ Access token expired or invalid.");
 
           router.replace("/login");
-
           return;
         }
 
-        console.error("❌ /auth/me failed.");
+        console.error("❌ /auth/me failed:", error);
       }
     };
 

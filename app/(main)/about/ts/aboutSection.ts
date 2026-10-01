@@ -1,6 +1,8 @@
 import "server-only";
 
 import { cacheLife, cacheTag } from "next/cache";
+import { redirect } from "next/navigation";
+
 import { AboutSection } from "../types/type";
 
 export type AboutResponse = {
@@ -16,8 +18,11 @@ export async function aboutSection(): Promise<AboutResponse> {
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/about/aboutvip`;
 
-
   const response = await fetch(url);
+
+  if (response.status === 401) {
+    redirect("/login");
+  }
 
   if (!response.ok) {
     throw new Error(
@@ -26,7 +31,6 @@ export async function aboutSection(): Promise<AboutResponse> {
   }
 
   const data = (await response.json()) as AboutResponse;
-
 
   return data;
 }

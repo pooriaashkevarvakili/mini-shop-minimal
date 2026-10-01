@@ -1,3 +1,4 @@
+import WelcomeToast from "../components/Home/WelcomeToast";
 import ProductPageClient from "./ProductPageClient";
 
 interface PageProps {
@@ -11,5 +12,13 @@ export default async function ProductPage({
 }: PageProps) {
   const { id } = await params;
 
-  return <ProductPageClient productId={id} />;
+  return (
+  <>
+        <WelcomeToast/>
+    <ProductPageClient productId={id} />
+
+  </>
+
+
+  );
 }

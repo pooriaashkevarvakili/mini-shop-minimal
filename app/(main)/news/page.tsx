@@ -1,3 +1,4 @@
+import WelcomeToast from "@/app/components/Home/WelcomeToast";
 import NewsCard from "./NewsCard";
 import NewsHerofront from "./NewsHero";
 
@@ -10,6 +11,7 @@ export default async function NewsListPage() {
 
   return (
     <>
+    <WelcomeToast/>
       <NewsHerofront />
 
       <main

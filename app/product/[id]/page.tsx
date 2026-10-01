@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import ProductPageClient from "./ProductPageClient";
+import WelcomeToast from "@/app/components/Home/WelcomeToast";
 
 interface PageProps {
   params: Promise<{
@@ -40,6 +41,8 @@ export default function ProductPage({
 }: PageProps) {
   return (
     <Suspense fallback={<ProductLoading />}>
+              <WelcomeToast/>
+      
       <ProductContent params={params} />
     </Suspense>
   );
