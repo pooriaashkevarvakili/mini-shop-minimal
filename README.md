@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Minimal Shop — Frontend
 
-## Getting Started
+A modern and minimal e-commerce frontend built with **Next.js**, **React**, and **TypeScript**.
 
-First, run the development server:
+This project provides a clean and responsive shopping experience with product management, API integration, form validation, and reusable UI components.
+
+## Tech Stack
+
+* **Next.js 16** — React framework
+* **React 19** — UI library
+* **TypeScript** — Type-safe development
+* **Ant Design** — UI components
+* **Tailwind CSS** — Styling
+* **TanStack React Query** — Server state management
+* **Axios** — API requests
+* **Formik + Yup** — Form handling and validation
+* **React Icons** — Icons
+* **React Toastify** — Notifications
+
+## Requirements
+
+* Node.js 20+
+* npm, Yarn, pnpm, or Bun
+
+## Installation
+
+```bash
+git clone <repository-url>
+cd project-shop-minimal
+
+npm install
+```
+
+## Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+Set `NEXT_PUBLIC_API_URL` to the URL of your backend API.
+
+## Running the Application
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Production
 
-## Learn More
+Build the application:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Start the production server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run start
+```
 
-## Deploy on Vercel
+## Available Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Command         | Description                      |
+| --------------- | -------------------------------- |
+| `npm run dev`   | Start the development server     |
+| `npm run build` | Build the production application |
+| `npm run start` | Start the production server      |
+| `npm run lint`  | Run ESLint                       |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```text
+src/
+├── app/              # Next.js App Router
+├── components/       # Reusable UI components
+├── services/         # API and HTTP services
+├── hooks/            # Custom React hooks
+├── providers/        # Application providers
+├── types/            # TypeScript types
+├── utils/             # Utility functions
+└── ...
+```
+
+## API Integration
+
+The frontend communicates with the backend through REST APIs using **Axios**.
+
+Server-side state and API caching are managed with **TanStack React Query**.
+
+Make sure the backend API is running and that `NEXT_PUBLIC_API_URL` points to the correct API URL.
+
+## Forms & Validation
+
+Forms are handled using:
+
+* **Formik** for form state management
+* **Yup** for schema-based validation
+
+## UI & Styling
+
+The application uses **Ant Design** for reusable UI components and **Tailwind CSS** for custom layouts and styling.
+
+## Production
+
+For production deployment, build the application first:
+
+```bash
+npm run build
+npm run start
+```
+
+The application can be deployed to platforms that support Next.js applications, such as Vercel or a Node.js server.
+
+## License
+
+This project is licensed under the **MIT License**.
