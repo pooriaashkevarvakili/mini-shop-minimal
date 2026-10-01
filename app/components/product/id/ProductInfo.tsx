@@ -31,7 +31,6 @@ export default function ProductInfo({
       className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7"
       dir="rtl"
     >
-      {/* Header */}
       <div className="border-b border-gray-100 pb-6">
         {product.badge && (
           <div className="mb-4">
@@ -77,7 +76,6 @@ export default function ProductInfo({
         )}
       </div>
 
-      {/* Price */}
       <div className="border-b border-gray-100 py-6">
         <div className="flex items-end justify-between gap-4">
           <div>
@@ -104,7 +102,6 @@ export default function ProductInfo({
         </div>
       </div>
 
-      {/* Product Actions */}
       <ProductActions
         product={product}
         stock={stock}
@@ -114,7 +111,6 @@ export default function ProductInfo({
         formatPrice={formatPrice}
       />
 
-      {/* Specs */}
       <div className="mt-6">
         <ProductSpecs product={product} />
       </div>

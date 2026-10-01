@@ -63,9 +63,7 @@ export default function PurchaseModal({
           </button>
         </div>
 
-        {/* Content */}
         <div className="p-5">
-          {/* Product */}
           <div className="flex items-center gap-4">
             <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-gray-50">
               <Image
@@ -95,7 +93,6 @@ export default function PurchaseModal({
             </div>
           </div>
 
-          {/* Total */}
           <div className="mt-5 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-500">
@@ -114,7 +111,6 @@ export default function PurchaseModal({
             </div>
           </div>
 
-          {/* Actions */}
           <div className="mt-5 space-y-2">
             <button
               type="button"
